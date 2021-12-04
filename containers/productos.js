@@ -39,6 +39,33 @@ class Productos {
             });
         return data;
     }
+
+    async deleteId(id) {
+        await knex("products")
+            .where("id", id)
+            .del()
+            .then((res) => {
+                console.log("Producto eliminado con éxito");
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+    async updateId(id, product) {
+        let data = [];
+        await knex("products")
+            .where("id", id)
+            .update({nombre: product.nombre, precio: product.precio, thumb: product.thumb, role: product.role})
+            .then((res) => {
+                data = res;
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        return data;
+    }
+
 }
 
 module.exports = Productos;
