@@ -1,28 +1,50 @@
-const { getData, updateData, deleteData, saveData } = require('../modules/prodData')
+// const { getData, updateData, deleteData, saveData } = require('../modules/prodData')
+const ProductDaos = require("../daos/productsDaos")
 
-const getService = async () => {
-    let prods = await getData()
-    return prods
+let instanceProdService = []
+
+class productServices {
+    constructor() {
+        this.ProductDaos = new ProductDaos()
+        this.value = Math.random()
+    }
+    //**************************** SINGLETON ****************************** */
+    static getInstance() {
+        if(!instanceProdService){
+            instanceProdService = new productServices()
+        }
+        return instanceProdService
+    }
+    //**************************** SINGLETON ****************************** */
+
+    async getService(){
+        let prods = await this.ProductDaos.getData()
+        return prods    
+    }
+    async updateService(){
+        let prod = await this.ProductDaos.updateData(id, dato);
+        return prod
+    }
+    
+    async deleteService(){
+        let prod = await this.ProductDaos.deleteData(id)
+        return prod
+    }
+    
+    async saveService(){
+        let prod = await this.ProductDaos.saveData(dataObj)
+        return prod
+    }
+    async getServiceById(id){
+        let prod
+        if(id){
+            prod = await this.ProductDaos.getByIdDB(id)
+        } else {
+            prod = await this.ProductDaos.getData()
+        }
+        return prod
+    }
 }
 
-const updateService = async (id, dato) => {
-    let prod = await updateData(id, dato);
-    return prod
-}
 
-const deleteService = async (id) => {
-    let prod = await deleteData(id)
-    return prod
-}
-
-const saveService = async (dataObj) => {
-    let prod = await saveData(dataObj)
-    return prod
-}
-
-module.exports = {
-    getService,
-    updateService,
-    deleteService,
-    saveService
-}
+module.exports = productServices

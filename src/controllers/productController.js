@@ -1,31 +1,33 @@
-const { getService, updateService, deleteService, saveService } = require('../services/productServices')
+const ProductServices = require('../services/productServices')
+
+const prodServices = new ProductServices()
 
 const getDataController = async (req,res) => {
-    let data = await getService();
+    let data = await prodServices.getService()
     res.render("productos", {data: data});
 }
 
 const updateDataController = async (req,res) => {
     let id = req.params.id;
     let dato = req.body;
-    await updateService(id, dato);
+    await prodServices.updateService(id, dato);
     res.send("Actualizado");
 }
 
 const deleteDataController = async (req,res) => {
     let id = req.params.id;
-    await deleteService(id);
+    await prodServices.deleteService(id);
     res.send("Eliminado");
 }
 
 // para el socket.io
 const emitProdController = async () => {
-    let data = await getService();
+    let data = await prodServices.getService();
     return data;
 }
 
 const saveProdController = async (dataObj) => {
-    let data = await saveService(dataObj);
+    let data = await prodServices.saveService(dataObj);
     return data;
 }
 
