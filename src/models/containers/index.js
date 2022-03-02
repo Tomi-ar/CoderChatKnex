@@ -1,12 +1,12 @@
 const minimist = require('minimist');
 const argv = minimist(process.argv.slice(2));
-const dataBase = argv._[0];
+const dataBase = argv._[0]
 
 let productDAO
 let msjDAO
 
 switch(dataBase){
-    case 'MongoDB':
+    case 'mongodb':
         const ProductContMongo = require('./prodContainerMongoDB');
         const MsjContMongo = require('./MensjContainerMongoDB')
         productDAO = new ProductContMongo();

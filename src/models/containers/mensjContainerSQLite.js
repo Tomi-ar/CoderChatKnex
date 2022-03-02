@@ -10,7 +10,7 @@ class Mensajes {
     //**************************** SINGLETON ****************************** */
     static getInstance() {
         if(!instanceMsjSQLite){
-            instanceMsjSQLite = new productServices()
+            instanceMsjSQLite = new Mensajes()
         }
         return instanceMsjSQLite
     }

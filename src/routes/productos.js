@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getDataController, updateDataController, deleteDataController } = require('../controllers/productController');
+const { getDataController, updateDataController, deleteDataController } = require('../models/controllers/productController');
 
 const router = new Router();
 

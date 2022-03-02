@@ -9,7 +9,7 @@ class ProductDaos{
     //**************************** SINGLETON ****************************** */
     static getInstance() {
         if(!instanceProdDaos){
-            instanceProdDaos = new productServices()
+            instanceProdDaos = new ProductDaos()
         }
         return instanceProdDaos
     }
@@ -28,7 +28,7 @@ class ProductDaos{
         let data = await productDAO.updateId(id, dato)
         console.log(data)
     }
-    async saveData(product){
+    async saveData(dataObj){
         let data = await productDAO.save(dataObj)
         console.log(data)
     }

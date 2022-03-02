@@ -1,5 +1,5 @@
-const { emitProdController, saveProdController } = require('../controllers/productController');
-const { emitMsjController, saveMsjController } = require('../controllers/msjController');
+const { emitProdController, saveProdController } = require('../models/controllers/productController');
+const { emitMsjController, saveMsjController } = require('../models/controllers/msjController');
 
 io.on("connection", async (socket) => {
     console.log("New connection");

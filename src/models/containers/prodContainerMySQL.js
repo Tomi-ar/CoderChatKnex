@@ -1,9 +1,20 @@
 const knex = require('../config/knexMySQL');
+let instanceProdMySQL = []
 
 class Productos {
     constructor() {
         this.products = [];
+        this.value = Math.random()
     }
+    
+    //**************************** SINGLETON ****************************** */
+    static getInstance() {
+        if(!instanceProdMySQL){
+            instanceProdMySQL = new Productos()
+        }
+        return instanceProdMySQL
+    }
+    //**************************** SINGLETON ****************************** */
 
     async getAll() {
         let data = [];
