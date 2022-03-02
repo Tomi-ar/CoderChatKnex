@@ -21,3 +21,34 @@ switch(dataBase){
 }
 
 module.exports = {productDAO, msjDAO}
+
+// class Algo {
+//     LOGICA???
+// }
+
+
+// class Mongo extends Algo {
+//     constructor(data){
+//         super()
+//         this.type = 'mongodb'
+//     }
+// }
+// class Firebase extends Algo{
+//     constructor(data){
+//         super()
+//         this.type = 'firebase'
+//     }
+// }
+// class Otros extends Algo{
+//     constructor(data){
+//         super()
+//         this.type = 'otros'
+//     }
+// }
+// class MyDB {
+//     createDB(data){
+//         if(data.type == 'mongodb') return new Mongo(data)
+//         if(data.type == 'firebase') return new Firebase(data)
+//         if(data.type == 'otros') return new Otros(data)
+//     }
+// }
