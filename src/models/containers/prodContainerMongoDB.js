@@ -1,70 +1,70 @@
-const knex = require('../config/knexMySQL');
+const products = require('../config/MongoSchema');
+const MongoClient = require('../config/MongoDB')
 
-class Productos {
+let instanceProdMongo = []
+
+class ProductosMongo {
     constructor() {
         this.products = [];
+        this.value = Math.random()
+        this.mongoClient = new MongoClient
+        this.mongoClient.connect()
     }
-    //***************************MODIFICAR PARA MONGODB*********************** */
-    // async getAll() {
-    //     let data = [];
-    //     await knex
-    //         .select("id", "nombre", "precio", "thumb")
-    //         .from("products")
-    //         .then((res) => {
-    //             console.log("Producto guardado con éxito");
-    //             data = res;
-    //         });
-    //     return data;
-    // }
 
-    // async getById(id) {
-    //     let data = [];
-    //     await knex
-    //         .select("id", "nombre", "precio", "thumb")
-    //         .from("products")
-    //         .where("id", id)
-    //         .then((res) => {
-    //             data = res;
-    //         });
-    //     return data;
-    // }
-
-    // async save(product) {
-    //     let data = [];
-    //     await knex("products")
-    //         .insert(product)
-    //         .then((res) => {
-    //             data = res;
-    //         });
-    //     return data;
-    // }
-
-    // async deleteId(id) {
-    //     await knex("products")
-    //         .where("id", id)
-    //         .del()
-    //         .then((res) => {
-    //             console.log("Producto eliminado con éxito");
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         })
-    // }
-
-    // async updateId(id, product) {
-    //     let data = [];
-    //     await knex("products")
-    //         .where("id", id)
-    //         .update({nombre: product.nombre, precio: product.precio, thumb: product.thumb, role: product.role})
-    //         .then((res) => {
-    //             data = res;
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         })
-    //     return data;
-    // }
-
+    //**************************** SINGLETON ****************************** */
+    static getInstance() {
+        if(!instanceProdMongo){
+            instanceProdMongo = new ProductosMongo()
+        }
+        return instanceProdMongo
+    }
+    //**************************** SINGLETON ****************************** */
+    
+    async getAll() {
+        try {
+            let data = await products.find({});
+            return data;
+        } catch (error) {
+            console.log("Problemas con el get "+error);
+        }
+    }
+    async getById(id) {
+        try {
+            let data = await products.find({_id: id});
+            return data;
+        } catch (error) {
+            console.log("ID no encontrado "+error);
+        }
+    }
+    async save(product) {
+        try {
+            let newProd = {
+                nombre: product.nombre,
+                precio: product.precio,
+                thumb: product.thumb
+            };
+            let data = await new products(newProd).save()
+            return data;
+        } catch (error) {
+            console.log("Problemas con el save "+error);
+        }
+    }
+    async deleteId(id) {
+        try {
+            let data = await products.findOneAndRemove({_id: id});
+            return data;
+        } catch (error) {
+            console.log("Problemas con el delete "+error);
+        }
+    }
+    async updateId(id, product) {
+        try {
+            let data = products.findOneAndUpdate({_id: id}, product)
+            return data;
+        } catch (error) {
+            console.log("Problemas con el update "+error);
+        }
+    }
 }
 
-module.exports = Productos;
+module.exports = ProductosMongo;

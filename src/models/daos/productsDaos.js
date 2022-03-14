@@ -18,23 +18,23 @@ class ProductDaos{
 
     async getData(){
         let data = await productDAO.getAll()
-        console.log(data)
+        return data
     }
     async getByIdDB(id){
         let data = await productDAO.getById(id)
-        console.log(data)
+        return data
     }
     async updateData(id, dato){
         let data = await productDAO.updateId(id, dato)
-        console.log(data)
+        return data
     }
     async saveData(dataObj){
         let data = await productDAO.save(dataObj)
-        console.log(data)
+        return data
     }
     async deleteData(id){
         let data = await productDAO.deleteId(id)
-        console.log(data)
+        return data
     }
 
 }

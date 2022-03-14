@@ -1,7 +1,7 @@
 const knex = require('../config/knexMySQL');
 let instanceProdMySQL = []
 
-class Productos {
+class ProductosMySQL {
     constructor() {
         this.products = [];
         this.value = Math.random()
@@ -22,7 +22,7 @@ class Productos {
             .select("id", "nombre", "precio", "thumb")
             .from("products")
             .then((res) => {
-                console.log("Producto guardado con éxito");
+                console.log("Producto encontrado con éxito");
                 data = res;
             });
         return data;
@@ -78,4 +78,4 @@ class Productos {
 
 }
 
-module.exports = Productos;
+module.exports = ProductosMySQL;

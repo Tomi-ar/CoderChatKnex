@@ -4,7 +4,17 @@ const prodServices = new ProductServices()
 
 const getDataController = async (req,res) => {
     let data = await prodServices.getService()
-    res.render("productos", {data: data});
+    res.json({data: data})
+}
+
+const getDataControllerId = async (req,res) => {
+    let data = await prodServices.getServiceById(req.params.id)
+    res.json({data: data})
+}
+
+const postDataController = async (req,res) => {
+    let data = await prodServices.saveService(req.body)
+    res.json({data: data})
 }
 
 const updateDataController = async (req,res) => {
@@ -34,6 +44,8 @@ const saveProdController = async (dataObj) => {
 
 module.exports = {
     getDataController,
+    getDataControllerId,
+    postDataController,
     updateDataController,   
     deleteDataController,
     emitProdController,

@@ -1,6 +1,5 @@
-const knex = require('../config/knexSQLite');
 
-class Mensajes {
+class MensajesMongo {
     constructor() {
         this.mensajes = [];
     }
@@ -21,4 +20,4 @@ class Mensajes {
     // }
 }
 
-module.exports = Mensajes;
+module.exports = MensajesMongo;

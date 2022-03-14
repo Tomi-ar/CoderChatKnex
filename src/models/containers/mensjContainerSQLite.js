@@ -1,7 +1,7 @@
 const knex = require('../config/knexSQLite');
 let instanceMsjSQLite = null;
 
-class Mensajes {
+class MensajesSQLite {
     constructor() {
         this.mensajes = [];
         this.value = Math.random();
@@ -32,4 +32,4 @@ class Mensajes {
     }
 }
 
-module.exports = Mensajes;
+module.exports = MensajesSQLite;

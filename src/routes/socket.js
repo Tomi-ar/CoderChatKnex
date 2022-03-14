@@ -1,6 +1,14 @@
 const { emitProdController, saveProdController } = require('../models/controllers/productController');
 const { emitMsjController, saveMsjController } = require('../models/controllers/msjController');
 
+const express = require("express")
+const app = express();
+const http = require("http")
+const server = http.createServer(app)
+const { Server } = require("socket.io")
+const io = new Server(server)
+
+
 io.on("connection", async (socket) => {
     console.log("New connection");
     socket.emit("Messages", await emitMsjController)

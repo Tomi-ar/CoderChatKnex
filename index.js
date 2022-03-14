@@ -2,17 +2,14 @@ const express = require("express")
 const app = express();
 const router = require("./src/routes/productos");
 const { engine } = require('express-handlebars');
+// Socket
+require('./src/routes/socket')
 
 // Server
 const http = require("http")
 const server = http.createServer(app)
 const port = process.env.PORT || 3030;
 
-// Socket
-const { Server } = require("socket.io")
-const io = new Server(server)
-require('./src/routes/socket')
-//NO ESTOY SEGURO DE LA LINEA DE ARRIBA...
 
 app.use(express.static(__dirname+"./src/public"))
 

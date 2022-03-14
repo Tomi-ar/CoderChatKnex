@@ -21,17 +21,17 @@ class productServices {
         let prods = await this.ProductDaos.getData()
         return prods    
     }
-    async updateService(){
+    async updateService(id, dato){
         let prod = await this.ProductDaos.updateData(id, dato);
         return prod
     }
     
-    async deleteService(){
+    async deleteService(id){
         let prod = await this.ProductDaos.deleteData(id)
         return prod
     }
     
-    async saveService(){
+    async saveService(dataObj){
         let prod = await this.ProductDaos.saveData(dataObj)
         return prod
     }

@@ -1,23 +1,22 @@
+const mongosee = require("mongoose");
+
 config = {
     name: "/CoderHouse-clase40",
     collection: "productos-clase40",
     host: "mongodb://localhost:27017"
 }
 
-const mongosee = require("mongoose");
-
-class mongoClient{
+class MongoClient{
     constructor(){
-        this.connect = false
+        // this.connect = false
         this.client = mongosee
     }
 
     async connect(){
         try {
-            await this.client.connect(config.host+config.name, {
+            this.client.connect(config.host+config.name, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
-                useCreateIndex: true
             })
             console.log("MongoDB conectado");
         } catch (error) {
@@ -35,4 +34,4 @@ class mongoClient{
     }
 }
 
-module.exports = mongoClient;
+module.exports = MongoClient;
