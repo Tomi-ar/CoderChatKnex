@@ -35,29 +35,29 @@ app.engine(
 
 const graphSchema = buildSchema(`
     type Producto{
-        id: String!,
+        id: ID!,
         nombre: String!,
-        precio: Float!,
+        precio: Int!,
         thumb: String!,
         role: String,
     }
     
     input ProductoInput{
         nombre: String!,
-        precio: Float!,
+        precio: Int!,
         thumb: String!,
         role: String,
     }
 
     type Query{
         getAll: [Producto],
-        getById(id: String!): Producto,
+        getById(id: ID!): Producto,
     }
 
     type Mutation{
-        save(input: ProductoInput): Producto,
-        updateId(id: String!, input: ProductoInput): Producto,
-        deleteId(id: String!): Producto,
+        save(nombre: String!, precio: Int!, thumb: String!, role: String,): Producto,
+        updateId(id: ID!, input: ProductoInput): Producto,
+        deleteId(id: ID!): Producto,
     }
 `)
 
@@ -128,6 +128,18 @@ server.listen(port, () => {
 //**************QUERIES */
 // query{
 //     getAll{
+//         nombre
+//         id
+//     }
+// }
+
+// mutation{
+//     save(
+//         nombre: "tablet",
+//         precio: 1250,
+//         thumb: "unlinkmas",
+//         role: "user"
+//     ){
 //         nombre
 //         id
 //     }
