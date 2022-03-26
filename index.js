@@ -35,7 +35,7 @@ app.engine(
 
 const graphSchema = buildSchema(`
     type Producto{
-        id: ID!,
+        _id: ID!,
         nombre: String!,
         precio: Int!,
         thumb: String!,
@@ -51,13 +51,13 @@ const graphSchema = buildSchema(`
 
     type Query{
         getAll: [Producto],
-        getById(id: ID!): Producto,
+        getById(_id: ID!): Producto,
     }
 
     type Mutation{
         save(nombre: String!, precio: Int!, thumb: String!, role: String,): Producto,
-        updateId(id: ID!, input: ProductoInput): Producto,
-        deleteId(id: ID!): Producto,
+        updateId(_id: ID!, input: ProductoInput): Producto,
+        deleteId(_id: ID!): Producto,
     }
 `)
 
@@ -78,7 +78,7 @@ const root = {
     getById: async (id) => {
         try {
             let data = await products.find({_id: id});
-            return data;
+            return data[0];
         } catch (error) {
             console.log("ID no encontrado "+error);
         }
